@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: expo-rabbitmq-backplane
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        editor: vscode
+        app: expo-rabbitmq-backplane
+    spec:
+      containers:
+      - name: rabbitmq-backplane
+        image: rabbitmq
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  rabbitmq
+spec:
+  selector:
+    app:  expo-rabbitmq-backplane
+  type:  LoadBalancer 
+  ports:
+  - name:  http
+    port:  80
+    targetPort:  5672

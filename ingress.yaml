@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind : Ingress
 metadata: 
-  name: ingress-gcloud
+  name: expo-ingress
   annotations: 
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /$1
@@ -9,18 +9,18 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   backend:
-    serviceName: app-gcloud-service
+    serviceName: expo-api-service
     servicePort: 80
   rules:
     - http:
         paths:
           - path: /
             backend: 
-              serviceName: app-gcloud-service
+              serviceName: expo-ui-service
               servicePort: 80
-          - path: /gcloud/(.+)
+          - path: /api/v1/(.+)
             backend: 
-              serviceName: app-gcloud-service
+              serviceName: expo-api-service
               servicePort: 80
           - path: /graphql/(.+)
             backend: 
