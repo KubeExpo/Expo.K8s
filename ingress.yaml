@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind : Ingress
 metadata: 
   name: expo-ingress
@@ -23,11 +23,7 @@ spec:
             backend: 
               serviceName: expo-api-service
               servicePort: 80
-          - path: /api/account/(.+)
+          - path: /api/v2/(?:[A-z0-9]+)?
             backend: 
-              serviceName: app-account-service
-              servicePort: 80
-          - path: /api/notification/(.+)
-            backend: 
-              serviceName: app-notification-service
+              serviceName: expo-api-service
               servicePort: 80
