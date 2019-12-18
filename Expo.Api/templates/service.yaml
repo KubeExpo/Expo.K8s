@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "Expo.Api.fullname" . }}
+  name: {{ include "Expo.Api.name" . }}-service
   labels:
     {{- include "Expo.Api.labels" . | nindent 4 }}
 spec:

@@ -1,9 +1,10 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ include "Expo.Api.fullname" . }}
   labels:
     {{- include "Expo.Api.labels" . | nindent 4 }}
+    app-version: {{ .Values.version}}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -18,6 +19,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      restartPolicy: {{ .Values.restartPolicy }}
       serviceAccountName: {{ include "Expo.Api.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -25,7 +27,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -33,11 +35,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path:  /status/healthz
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path:  /status/healthz
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

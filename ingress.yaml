@@ -9,11 +9,12 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
-  backend:
-    serviceName: expo-api-service
-    servicePort: 80
+  # backend:
+  #   serviceName: expo-api-service
+  #   servicePort: 80
   rules:
-    - http:
+    - host: bigjrcwork.com
+      http:
         paths:
           - path: /
             backend: 
@@ -23,7 +24,7 @@ spec:
             backend: 
               serviceName: expo-api-service
               servicePort: 80
-          - path: /api/v2/(?:[A-z0-9]+)?
+          - path: /api/v2/([a-z0-9]+$)
             backend: 
               serviceName: expo-api-service
               servicePort: 80
