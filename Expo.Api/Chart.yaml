@@ -1,6 +1,7 @@
 apiVersion: v2
 name: expo-api
 description: A Helm chart for Kubernetes
+version : alpha-v0.3
 
 # A chart can be either an 'application' or a 'library' chart.
 #

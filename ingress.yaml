@@ -20,7 +20,7 @@ spec:
             backend: 
               serviceName: expo-ui-service
               servicePort: 80
-          - path: /api/v1/(.+)
+          - path: /api/gateway/(.+)
             backend: 
               serviceName: expo-api-service
               servicePort: 80
