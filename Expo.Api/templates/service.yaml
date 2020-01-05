@@ -6,6 +6,7 @@ metadata:
     {{- include "Expo.Api.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
+  externalTrafficPolicy: Local
   ports:
     - port: {{ .Values.service.internalPort }}
       targetPort: http

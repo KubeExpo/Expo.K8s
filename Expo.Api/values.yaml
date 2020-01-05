@@ -5,11 +5,14 @@
 replicaCount: 1
 restartPolicy: Always
 image:
-  repository: gcr.io/green-buttress-260810/expo.api
+  repository: gcr.io/green-buttress-260810/expo-api
   pullPolicy: Always
+version: 0.0.3
 
-imagePullSecrets: []
-nameOverride: ""
+imagePullSecrets: [
+  {name: gcr-json-key }
+]
+nameOverride: "expo-api"
 fullnameOverride: ""
 
 serviceAccount:
@@ -31,17 +34,24 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: NodePort
+  type: LoadBalancer
   port: 80
+  internalPort: 80
 
 ingress:
-  enabled: false
-  annotations: {}
+  enabled: true
+  annotations: {
+    kubernetes.io/ingress.class: "nginx",
+    nginx.ingress.kubernetes.io/rewrite-target: /$2,
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  }
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
-      paths: []
+      paths: [
+          /
+      ]
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
