@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"master_nodes","Source":"./kubernetes/master","Dir":"kubernetes\\master"},{"Key":"worker_nodes","Source":"./kubernetes/worker","Dir":"kubernetes\\worker"}]}
