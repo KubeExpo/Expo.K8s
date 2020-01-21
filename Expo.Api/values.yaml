@@ -5,9 +5,9 @@
 replicaCount: 1
 restartPolicy: Always
 image:
-  repository: gcr.io/green-buttress-260810/expo-api
+  repository: gcr.io/fluted-agency-265710/expo-api
   pullPolicy: Always
-version: 0.0.3
+version: 0.0.1
 
 imagePullSecrets: [
   {name: gcr-json-key }
