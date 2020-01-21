@@ -49,7 +49,8 @@ ingress:
   hosts:
     # - host: chart-example.local
     - paths: [
-          /expense
+          /expense,
+          /expense(.+)
       ]
   tls: []
   #  - secretName: chart-example-tls
